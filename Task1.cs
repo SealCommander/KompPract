@@ -1,31 +1,74 @@
-﻿namespace WinFormsApp1
+namespace КП
 {
-    public partial class Form1 : Form
+    internal class Program
     {
-        public Form1()
+        public static int task1(string numbers)
         {
-            InitializeComponent();
+            int maxcount = 1;
+            int currentcount = 1;
+
+            for (int i = 0; i < numbers.Length - 1; i++)
+            {
+                char curr_num_str = numbers[i];
+                char curr_num2_str = numbers[i + 1];
+                int curr_num_int = curr_num_str - '0';
+                int curr_num2_int = curr_num2_str - '0';
+                if (curr_num2_int == curr_num_int)
+                {
+                    currentcount++;
+                    if (currentcount > maxcount)
+                    {
+                        maxcount = currentcount;
+                    }
+                }
+                else
+                {
+                    currentcount = 1;
+                }
+
+                if (curr_num_int == 0)
+                {
+                    break;
+                }
+                
+
+            }
+
+            return maxcount;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        public static void test1()
         {
+            if (task1("1122233330") == 4)
+            {
+                Console.WriteLine("YES");
+            }
+            else
+            {
+                Console.Write("NO");
+            }
 
+            if (task1("7777770") == 6)
+            {
+                Console.WriteLine("YES");
+            }
+            else
+            {
+                Console.WriteLine("NO");
+            }
+
+            if (task1("0") == 1)
+            {
+                Console.WriteLine("YES");
+            }
+            else
+            {
+                Console.WriteLine("NO");
+            }
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        static void Main()
         {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            label1.Text = "Привет";
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
+            test1();
         }
     }
 }
