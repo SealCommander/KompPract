@@ -1,0 +1,80 @@
+
+namespace Task_12
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            EquationTests.RunTests();
+        }
+    }
+
+    public static class EquationSolver
+    {
+        public static object SolveEquation(int a, int b)
+        {
+            if (a != 0)
+            {
+                if (b % a == 0)
+                {
+                    return b / a;
+                }
+                else
+                {
+                    return "no solution";
+                }
+            }
+            else if (b == 0)
+            {
+                return "many solutions";
+            }
+            else
+            {
+                return "no solution";
+            }
+        }
+    }
+
+    public static class EquationTests
+    {
+        public static void RunTests()
+        {
+            Console.WriteLine("Запуск тестов...");
+
+            TestAndCheck(1, -2, -2);
+            TestAndCheck(2, -1, "no solution");
+            TestAndCheck(0, 0, "many solutions");
+            TestAndCheck(5, 0, 0);
+            TestAndCheck(0, 7, "no solution");
+            TestAndCheck(10, 11, "no solution");
+            TestAndCheck(1, 30000, 30000);
+            TestAndCheck(-15000, 15000, -1);
+            TestAndCheck(-29999, 24999, "no solution");
+
+            Console.WriteLine("Тесты завершены.");
+        }
+
+        private static void TestAndCheck(int a, int b, object expected)
+        {
+            Console.Write($"Тест для a = {a}, b = {b}: ");
+
+            try
+            {
+                object actual = EquationSolver.SolveEquation(a, b);
+
+                if (Equals(actual, expected))
+                {
+                    Console.WriteLine("OK");
+                }
+                else
+                {
+                    Console.WriteLine($"FAIL (ожидалось: {expected}, получено: {actual})");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERROR ({nameof(EquationSolver.SolveEquation)} выбросил исключение: {ex.Message})");
+            }
+        }
+    }
+}
