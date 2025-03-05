@@ -1,0 +1,29 @@
+class Program
+{
+    static void Main()
+    {
+        int[] array = { 2, 4, 6, 8, 10, 3, 7, 9 };
+        int result = FindMinOdd(array);
+        Console.WriteLine(result);
+    }
+
+    static int FindMinOdd(int[] array)
+    {
+        int minOdd = int.MaxValue;
+        bool hasOdd = false;
+
+        foreach (int num in array)
+        {
+            if (num % 2 != 0)
+            {
+                hasOdd = true;
+                if (num < minOdd)
+                {
+                    minOdd = num;
+                }
+            }
+        }
+
+        return hasOdd ? minOdd : 0;
+    }
+}
