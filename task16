@@ -1,0 +1,124 @@
+namespace WinFormsApp1
+{
+    public partial class Form1 : Form
+    {
+        private Random random = new Random();
+        private int targetNumber;
+        private int attemptsLeft;
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (int.TryParse(textBox4.Text, out int guess))
+            {
+                attemptsLeft--;
+
+                if (guess == targetNumber)
+                {
+                    label5.Text = "Вы угадали!";
+                    EndGame();
+                }
+                else if (attemptsLeft > 0)
+                {
+                    label5.Text = guess < targetNumber
+                        ? $"Загаданное число больше. Попыток осталось: {attemptsLeft}"
+                        : $"Загаданное число меньше. Попыток осталось: {attemptsLeft}";
+                }
+                else
+                {
+                    label5.Text = $"Вы проиграли! Загаданное число было: {targetNumber}.";
+                    EndGame();
+                }
+            }
+            
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (int.TryParse(textBox1.Text, out int min) &&
+                int.TryParse(textBox2.Text, out int max) &&
+                int.TryParse(textBox3.Text, out int attempts) &&
+                min < max && attempts > 0)
+            {
+               
+                targetNumber = random.Next(min, max + 1);
+                attemptsLeft = attempts;
+
+      
+                button1.Enabled = false;
+                label4.Visible = true;
+                textBox4.Visible = true;
+                button2.Visible = true;
+                button2.Enabled = true;
+                label5.Text = $"Попыток осталось: {attemptsLeft}";
+            }
+           
+        }
+        private void EndGame()
+        {
+            // Возвращение формы в исходное состояние
+            button1.Enabled = true;
+            textBox4.Clear();
+            textBox4.Visible = false;
+            label4.Visible = false;
+            button2.Enabled = false;
+            button2.Visible = false;
+            label5.Text = "";
+        }
+    }
+
+}
