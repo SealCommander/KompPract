@@ -1,0 +1,79 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        RunTests();
+    }
+
+    static void RunTests()
+    {
+        TestAndCheck(20, 30, new List<int> { 23, 29 });
+        TestAndCheck(24, 28, new List<int> { });
+        TestAndCheck(139, 216, new List<int> { 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211 });
+        TestAndCheck(2987, 3068, new List<int> { 2999, 3001, 3011, 3019, 3023, 3037, 3041, 3049, 3061, 3067 });
+        TestAndCheck(539, 701, new List<int> { 541, 547, 557, 563, 569, 571, 577, 587, 593, 599, 601, 607, 613, 617, 619, 631, 641, 643, 647, 653, 659, 661, 673, 677, 683, 691, 701 });
+        TestAndCheck(1259, 1282, new List<int> { 1259, 1277, 1279 });
+    }
+
+    static void TestAndCheck(int a, int b, List<int> expected)
+    {
+        Console.Write($"Тест для a = {a}, b = {b}: ");
+        List<int> actual = FindPrimes(a, b);
+        if (AreEqual(actual, expected))
+        {
+            Console.WriteLine("OK");
+        }
+        else
+        {
+            Console.WriteLine($"FAIL (ожидалось: [{string.Join(", ", expected)}], получено: [{string.Join(", ", actual)}])");
+        }
+    }
+
+    static List<int> FindPrimes(int a, int b)
+    {
+        List<int> primes = new List<int>();
+        for (int i = Math.Max(a, 2); i <= b; i++)
+        {
+            if (IsPrime(i))
+            {
+                primes.Add(i);
+            }
+        }
+        return primes;
+    }
+
+    static bool IsPrime(int number)
+    {
+        if (number < 2)
+        {
+            return false;
+        }
+        for (int i = 2; i * i <= number; i++)
+        {
+            if (number % i == 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    static bool AreEqual(List<int> list1, List<int> list2)
+    {
+        if (list1.Count != list2.Count)
+        {
+            return false;
+        }
+        for (int i = 0; i < list1.Count; i++)
+        {
+            if (list1[i] != list2[i])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+}
