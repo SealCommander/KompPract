@@ -1,0 +1,36 @@
+    class Program
+    {
+        static List<int> FindElements(List<int> list)
+        {
+            List<int> result = new List<int>(); 
+
+           
+            for (int i = 1; i < list.Count - 1; i++)
+            {
+               
+                if (list[i] == list[i - 1] + list[i + 1])
+                {
+                    result.Add(list[i]);
+                }
+            }
+
+            return result; 
+        }
+
+        static void Main(string[] args)
+        {
+            
+            List<int> list = new List<int> { 1, 3, 2, 5, 7 };
+
+            
+            List<int> specialElements = FindElements(list);
+
+            
+            foreach (int elem in specialElements)
+            {
+                Console.Write(elem + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+}
