@@ -1,0 +1,81 @@
+ public partial class Form1 : Form
+ {
+     
+     private Button createButton; 
+     private Panel matrixPanel; 
+     private NumericUpDown rowsInput; 
+     private NumericUpDown colsInput; 
+
+     public Form1()
+     {
+         Text = "Матрица";
+         Size = new Size(800, 600); 
+
+         Label rowsLabel = new Label(); 
+         rowsLabel.Text = "Количество строк:";
+         rowsLabel.Location = new Point(20, 20); 
+         Controls.Add(rowsLabel); 
+
+         rowsInput = new NumericUpDown();
+         rowsInput.Location = new Point(150, 20); 
+         rowsInput.Minimum = 1;
+         rowsInput.Maximum = 15; 
+         rowsInput.Value = 3; 
+         Controls.Add(rowsInput);
+
+  
+         Label colsLabel = new Label(); 
+         colsLabel.Text = "Количество столбцов:";
+         colsLabel.Location = new Point(20, 60); 
+         Controls.Add(colsLabel); 
+
+         colsInput = new NumericUpDown(); 
+         colsInput.Location = new Point(150, 60); 
+         colsInput.Minimum = 1; 
+         colsInput.Maximum = 15; 
+         colsInput.Value = 3; 
+         Controls.Add(colsInput); 
+
+         createButton = new Button(); 
+         createButton.Text = "Создать матрицу";
+         createButton.Location = new Point(20, 100); 
+         createButton.Size = new Size(150, 30);
+         createButton.Click += CreateMatrix;
+         this.Controls.Add(createButton); 
+
+       
+         matrixPanel = new Panel();
+         matrixPanel.Location = new Point(20, 150);
+         matrixPanel.Size = new Size(740, 380); 
+         matrixPanel.AutoScroll = true; 
+         Controls.Add(matrixPanel); 
+     }
+
+  
+     private void CreateMatrix(object sender, EventArgs e)
+     {
+         matrixPanel.Controls.Clear(); 
+
+         int rows = (int)rowsInput.Value; 
+         int cols = (int)colsInput.Value; 
+
+    
+         for (int i = 0; i < rows; i++) 
+         {
+             for (int j = 0; j < cols; j++) 
+             {
+                 TextBox textBox = new TextBox(); 
+                 textBox.Location = new Point(j * 80, i * 40); 
+                 textBox.Width = 60; 
+                 textBox.Height = 30; 
+                 matrixPanel.Controls.Add(textBox); 
+             }
+         }
+     }
+
+
+     private void Form1_Load(object sender, EventArgs e)
+     {
+
+     }
+ }
